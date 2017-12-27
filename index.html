@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demo time</title>
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
+</head>
+
+<body>
+
+    <div id="app">
+
+        <header>
+            <div class="container">
+                <h1>Mano albumai</h1>
+            </div>
+        </header>
+
+        <section class="container">
+
+            <div class="text-right">
+                <button class="btn btn-success btn-show-modal" data-toggle="modal" data-target="#newAlbum">Pridėti naują</button>
+            </div>
+            <div>
+                <input v-model="searchText" class="search-input" type="text" name="" id="">
+                <button class="btn btn-info search" type="button">Ieškoti</button>
+            </div>
+            <hr>
+            <div class="album-list">
+                <div v-for="album in filteredAlbums" class="album clearfix panel panel-default">
+                    <div class="panel-body">
+                        <a target="_blank" class="btn btn-warning btn-xs play text-right" v-bind:href="'https://www.youtube.com/results?search_query=' + album.artist + album.album">Klausytis
+                            <i class="material-icons">play_arrow</i>
+                        </a>
+                        <img v-bind:src="'upload/' + album.image" alt="" class="pull-left" width="150">
+                        <h3>{{album.album}}
+                            <span class="artist-name">{{album.artist}}</span>
+                        </h3>
+                        <div v-for="tag in getTags(album.genre)" class="badge badge-pill badge-info"> {{tag}} </div>
+                        <div>{{album.releaseDate}}</div>
+                        
+                    </div>
+                    <button class="btn btn-xs btn-danger delete text-right" v-on:click="deleteAlbums(album)">
+                        <i class="material-icons">delete</i>
+                    </button>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- Modal -->
+        <div class="modal fade" id="newAlbum" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <h4 class="modal-title" id="myModalLabel">Pridėti naują albumą</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form name="music-records" class="form-horizontal">
+                            <div class="form-group">
+                                <label for="artist" class="col-sm-2 control-label">Atlikėjas</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" v-model="newAlbum.artist" placeholder="Atlikėjas">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="album" class="col-sm-2 control-label">Albumo pavadinimas</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" v-model="newAlbum.album">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="releaseDate" class="col-sm-2 control-label">Metai</label>
+                                <div class="col-sm-10">
+                                    <input type="number" class="form-control" v-model="newAlbum.releaseDate">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="genre" class="col-sm-2 control-label">Genre</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" v-model="newAlbum.genre">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="image" class="col-sm-2 control-label">Paveiksliukas</label>
+                                <div class="col-sm-10">
+                                    <input type="file" class="form-control" v-on:change="processFile($event)">
+                                </div>
+                            </div>
+                        </form>
+                        <div class="success-message">
+                            Duomenys išsaugoti.
+                            <a href="#">Norite pridėti dar vieną?</a>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Uždaryti</button>
+                        <button v-on:click="saveAlbum()
+                        " type="button" class="btn btn-primary">Pridėti</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script src="node_modules/promise-polyfill/promise.js"></script>
+    <script src="node_modules/whatwg-fetch/fetch.js"></script>
+    <script src="node_modules/vue/dist/vue.js"></script>
+    <script src="app.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
