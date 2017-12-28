@@ -24,10 +24,12 @@
 
             <div class="text-right">
                 <button class="btn btn-success btn-show-modal" data-toggle="modal" data-target="#newAlbum">Pridėti naują</button>
-            </div>
+            </div> 
             <div>
-                <input v-model="searchText" class="search-input" type="text" name="" id="">
-                <button class="btn btn-info search" type="button">Ieškoti</button>
+                <input v-model="searchText" class="search-input" type="text" placeholder="paieška" name="" id=""> <span>Albumas išleistas:</span>
+                <select v-model="selectedYears" name="years">
+                    <option v-for="year in albumsYear">{{year}}</option> 
+                </select> 
             </div>
             <hr>
             <div class="album-list">
