@@ -23,6 +23,22 @@
       "genre": "trip hop",
       "image": "massive-attack.jpg",
       "id": 5
+    },
+    {
+      "artist": "a",
+      "album": "s",
+      "releaseDate": "546",
+      "genre": "pop, hiphop",
+      "image": "",
+      "id": 6
+    },
+    {
+      "artist": "Muse",
+      "album": "Drones",
+      "releaseDate": "2015",
+      "genre": "rock, alternative rock",
+      "image": "066a023bd28629b4def993b6405e9bf5.jpg",
+      "id": 7
     }
   ]
 }
