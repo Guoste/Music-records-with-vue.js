@@ -23,15 +23,15 @@ const serverName = "http://localhost:3026";
 
 // duomenys iš serverio
  fetch(serverName + "/albums")
-    .then(function(response){
-        response.json()
+  .then(function(response){
+         response.json()
             .then(function(albums) {
-                 // Išsisaugom visus albumus
-                 app.albums = albums;
+                  // Išsisaugom visus albumus
+                  app.albums = albums;
                 // Spausdinam į HTML
-                // renderAlbums(allAlbums);
-            });
-    })
+                 // renderAlbums(allAlbums);
+             });
+     })
 
 
 // funkcija, kuri ištrina formos laukelius

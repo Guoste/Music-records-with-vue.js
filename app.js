@@ -12,9 +12,26 @@ let app = new Vue({
             releaseDate: "",
             genre: "",
             image: ""
+        },
+        modalMode: {
+            edit: false,
+            new: false
         }
     },
     methods: {
+        start: function() {
+            fetch(this.serverName + "/albums")
+                .then(function(response){
+                    response.json()
+                        .then(function(albums) {
+                            // Išsisaugom visus albumus
+                            app.albums = albums;
+ 
+                            // Spausdinam į HTML
+                            // renderAlbums(albums);
+                        });
+                })
+        },
         deleteAlbums: function (album) {
             fetch(serverName + "/albums/" + album.id, {
                 method: "delete"
@@ -48,8 +65,40 @@ let app = new Vue({
             })
             this.albums.push(this.newAlbum);
         },
+        clearForm: function() {
+            this.modalMode.edit = false;
+            this.modalMode.new = false;
 
-    },
+            app.newAlbum.album = "";
+            app.newAlbum.artist = "";
+            app.newAlbum.releaseDate = "";
+            app.newAlbum.genre = "";
+        },
+        editAlbum: function(album) {
+            this.modalMode.edit = true;
+
+            this.newAlbum.artist = album.artist;
+            this.newAlbum.album = album.album;
+            this.newAlbum.releaseDate = album.releaseDate;
+            this.newAlbum.genre = album.genre;
+            this.newAlbum.image = album.image;
+        },
+        updateAlbumOnServer: function() {
+            // fetch(serverName + "/albums", {
+            //     method: "PUT",
+            //     headers: { 'content-type': 'application/json' },
+            //     body: JSON.stringify(this.newAlbum)
+            // }).then(function (response) {
+            //     response.json()
+            //         .then(function (result) {
+            //             console.log("albumas atnaujintas");
+            //         });
+            // })
+        // }
+            console.log("updated");
+
+    }
+},
     computed: {
         filteredAlbums: function () {
             let filteredByYear;
@@ -81,6 +130,13 @@ let app = new Vue({
             })
             return allYears;
         }
-    }
+        }
+    
+});
+
+app.start();
+
+$('#newAlbum').on('hidden.bs.modal', function (e) {
+  app.clearForm();
 });
 
