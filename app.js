@@ -5,7 +5,7 @@ let app = new Vue({
     data: {
         albums: [],
         searchText: "",
-        selectedYears: "",
+        selectedYears: "Visi metai",
         newAlbum: {
             artist: "",
             album: "",
@@ -52,8 +52,16 @@ let app = new Vue({
     },
     computed: {
         filteredAlbums: function () {
-                     
-            return this.albums.filter(function (item) {
+            let filteredByYear;
+            if (this.selectedYears !== "Visi metai") {
+                filteredByYear = this.albums.filter(function (item) {
+                    return app.selectedYears === item.releaseDate
+                });
+            } else {
+                filteredByYear = this.albums;
+            }
+
+            return filteredByYear.filter(function (item) {
                 let searchText = app.searchText.toLowerCase();
                 let resultArtist = item.artist.toLowerCase().indexOf(searchText) !== -1 ? true : false;
                 let resultAlbum = item.album.toLowerCase().indexOf(searchText) !== -1 ? true : false;
@@ -62,8 +70,7 @@ let app = new Vue({
                     return true;
                 }
                 return false;
-
-            });
+            })
         },
         albumsYear: function () {
             let allYears = [];
@@ -71,7 +78,6 @@ let app = new Vue({
                 if (allYears.indexOf(album.releaseDate) === -1) {
                     allYears.push(album.releaseDate);
                 }
-
             })
             return allYears;
         }

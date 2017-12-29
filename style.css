@@ -42,3 +42,7 @@ h3 {
 .delete {
   margin: 10px;
 }
+.search-input {
+    margin-right: 20px;
+    width: 300px;
+}

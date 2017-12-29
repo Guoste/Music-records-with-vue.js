@@ -33,12 +33,7 @@ const serverName = "http://localhost:3026";
             });
     })
 
-// }
 
-
-
-
-// Funkcija, kuri saugo albumą
 // funkcija, kuri ištrina formos laukelius
 function deleteFormFields () {
     artistInput.value = "";
@@ -49,7 +44,6 @@ function deleteFormFields () {
 }
 
 
-// funkcija, kuri vykdo paiešką
 
 
 
