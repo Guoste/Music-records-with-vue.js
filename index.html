@@ -50,6 +50,9 @@
                     <button class="btn btn-xs btn-danger delete text-right" v-on:click="deleteAlbums(album)">
                         <i class="material-icons">delete</i>
                     </button>
+                    <button class="btn btn-xs delete text-right" v-on:click="editAlbum(album)" data-toggle="modal" data-target="#newAlbum">
+                        <i class="material-icons">mode_edit</i>
+                    </button>
                 </div>
             </div>
 
@@ -105,8 +108,8 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Uždaryti</button>
-                        <button v-on:click="saveAlbum()
-                        " type="button" class="btn btn-primary">Pridėti</button>
+                        <button v-if="!modalMode.edit" v-on:click="saveAlbum()" type="button" class="btn btn-primary">Pridėti</button>
+                        <button v-if="modalMode.edit" v-on:click="updateAlbumOnServer()" type="button" class="btn btn-success">Išsaugoti</button>
                     </div>
                 </div>
             </div>
