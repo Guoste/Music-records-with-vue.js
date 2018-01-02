@@ -23,7 +23,7 @@
         <section class="container">
 
             <div class="text-right">
-                <button class="btn btn-success btn-show-modal" data-toggle="modal" data-target="#newAlbum">Pridėti naują</button>
+                <button class="btn btn-success btn-show-modal" data-toggle="modal" data-target="#newAlbum" v-on:click = "clearForm()">Pridėti naują</button>
             </div> 
             <div>
                 <input v-model="searchText" class="search-input" type="text" placeholder="Paieška pagal albumą/atlikėją/žanrą" name="" id=""> <span>Albumas išleistas:</span>
@@ -103,13 +103,13 @@
                         </form>
                         <div class="success-message">
                             Duomenys išsaugoti.
-                            <a href="#">Norite pridėti dar vieną?</a>
+                            <a href="#" v-on:click = "clearForm()">Norite pridėti dar vieną?</a>
                         </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Uždaryti</button>
-                        <button v-if="!modalMode.edit" v-on:click="saveAlbum()" type="button" class="btn btn-primary">Pridėti</button>
-                        <button v-if="modalMode.edit" v-on:click="updateAlbumOnServer()" type="button" class="btn btn-success">Išsaugoti</button>
+                        <button v-if="!modalEdit.visible" v-on:click="saveAlbum()" type="button" class="btn btn-primary">Pridėti</button>
+                        <button v-if="modalEdit.visible" v-on:click="updateAlbum()" type="button" class="btn btn-success">Išsaugoti</button>
                     </div>
                 </div>
             </div>
@@ -123,7 +123,6 @@
     <script src="node_modules/whatwg-fetch/fetch.js"></script>
     <script src="node_modules/vue/dist/vue.js"></script>
     <script src="app.js"></script>
-    <script src="script.js"></script>
 </body>
 
 </html>
